@@ -1,9 +1,14 @@
 package com.project.inventory_management_system.entity;
+
 import com.project.inventory_management_system.enums.TransactionType;
 import jakarta.persistence.*;
-
+import lombok.*;
 import java.time.LocalDateTime;
 
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "stock_transactions")
 public class StockTransaction {

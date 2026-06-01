@@ -1,7 +1,12 @@
 package com.project.inventory_management_system.entity;
 
 import jakarta.persistence.*;
+import lombok.*;
 
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "suppliers")
 public class Supplier {
