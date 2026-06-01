@@ -3,6 +3,7 @@ package com.project.inventory_management_system.controller;
 import com.project.inventory_management_system.dto.request.StockTransactionRequestDto;
 import com.project.inventory_management_system.dto.response.StockTransactionResponseDto;
 import com.project.inventory_management_system.service.StockTransactionService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,7 +26,7 @@ public class StockTransactionController {
     @PostMapping("/stock-in")
     public ResponseEntity<StockTransactionResponseDto>
     addStock(
-            @RequestBody
+           @Valid @RequestBody
             StockTransactionRequestDto requestDto) {
 
         return ResponseEntity.ok(
@@ -36,7 +37,7 @@ public class StockTransactionController {
     @PostMapping("/stock-out")
     public ResponseEntity<StockTransactionResponseDto>
     removeStock(
-            @RequestBody
+           @Valid @RequestBody
             StockTransactionRequestDto requestDto) {
 
         return ResponseEntity.ok(

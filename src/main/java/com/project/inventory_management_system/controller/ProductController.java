@@ -3,6 +3,7 @@ package com.project.inventory_management_system.controller;
 import com.project.inventory_management_system.dto.request.ProductRequestDto;
 import com.project.inventory_management_system.dto.response.ProductResponseDto;
 import com.project.inventory_management_system.service.ProductService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,7 +24,7 @@ public class ProductController {
     @PostMapping
     public ResponseEntity<ProductResponseDto>
     createProduct(
-            @RequestBody ProductRequestDto requestDto) {
+           @Valid @RequestBody ProductRequestDto requestDto) {
 
         return ResponseEntity.ok(
                 productService.createProduct(
@@ -52,6 +53,7 @@ public class ProductController {
     public ResponseEntity<ProductResponseDto>
     updateProduct(
             @PathVariable Long productId,
+            @Valid
             @RequestBody ProductRequestDto requestDto) {
 
         return ResponseEntity.ok(

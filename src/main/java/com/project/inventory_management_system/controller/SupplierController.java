@@ -3,6 +3,7 @@ package com.project.inventory_management_system.controller;
 import com.project.inventory_management_system.dto.request.SupplierRequestDto;
 import com.project.inventory_management_system.dto.response.SupplierResponseDto;
 import com.project.inventory_management_system.service.SupplierService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,7 +24,7 @@ public class SupplierController {
     @PostMapping
     public ResponseEntity<SupplierResponseDto>
     createSupplier(
-            @RequestBody SupplierRequestDto requestDto) {
+            @Valid @RequestBody SupplierRequestDto requestDto) {
 
         return ResponseEntity.ok(
                 supplierService.createSupplier(
@@ -52,6 +53,7 @@ public class SupplierController {
     public ResponseEntity<SupplierResponseDto>
     updateSupplier(
             @PathVariable Long supplierId,
+            @Valid
             @RequestBody SupplierRequestDto requestDto) {
 
         return ResponseEntity.ok(

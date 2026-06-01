@@ -3,6 +3,7 @@ package com.project.inventory_management_system.controller;
 import com.project.inventory_management_system.dto.request.EmployeeRequestDto;
 import com.project.inventory_management_system.dto.response.EmployeeResponseDto;
 import com.project.inventory_management_system.service.EmployeeService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,7 +24,7 @@ public class EmployeeController {
     @PostMapping
     public ResponseEntity<EmployeeResponseDto>
     createEmployee(
-            @RequestBody EmployeeRequestDto requestDto) {
+           @Valid @RequestBody EmployeeRequestDto requestDto) {
 
         return ResponseEntity.ok(
                 employeeService.createEmployee(
@@ -52,6 +53,7 @@ public class EmployeeController {
     public ResponseEntity<EmployeeResponseDto>
     updateEmployee(
             @PathVariable Long employeeId,
+            @Valid
             @RequestBody EmployeeRequestDto requestDto) {
 
         return ResponseEntity.ok(

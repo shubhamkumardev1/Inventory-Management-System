@@ -3,6 +3,7 @@ package com.project.inventory_management_system.controller;
 import com.project.inventory_management_system.dto.request.CategoryRequestDto;
 import com.project.inventory_management_system.dto.response.CategoryResponseDto;
 import com.project.inventory_management_system.service.CategoryService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,7 +24,7 @@ public class CategoryController {
     @PostMapping
     public ResponseEntity<CategoryResponseDto>
     createCategory(
-            @RequestBody CategoryRequestDto requestDto) {
+            @Valid @RequestBody CategoryRequestDto requestDto) {
 
         return ResponseEntity.ok(
                 categoryService.createCategory(
@@ -52,6 +53,7 @@ public class CategoryController {
     public ResponseEntity<CategoryResponseDto>
     updateCategory(
             @PathVariable Long categoryId,
+            @Valid
             @RequestBody CategoryRequestDto requestDto) {
 
         return ResponseEntity.ok(
