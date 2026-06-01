@@ -5,6 +5,7 @@ import com.project.inventory_management_system.dto.response.ProductResponseDto;
 import com.project.inventory_management_system.entity.Category;
 import com.project.inventory_management_system.entity.Product;
 import com.project.inventory_management_system.entity.Supplier;
+import com.project.inventory_management_system.exception.ResourceNotFoundException;
 import com.project.inventory_management_system.repository.CategoryRepository;
 import com.project.inventory_management_system.repository.ProductRepository;
 import com.project.inventory_management_system.repository.SupplierRepository;
@@ -39,12 +40,18 @@ public class ProductServiceImpl implements ProductService {
         Category category =
                 categoryRepository.findById(
                                 requestDto.getCategoryId())
-                        .orElseThrow();
+                        .orElseThrow(() ->
+                                new ResourceNotFoundException(
+                                        "Category not found with id "
+                                                + requestDto.getCategoryId()));
 
         Supplier supplier =
                 supplierRepository.findById(
                                 requestDto.getSupplierId())
-                        .orElseThrow();
+                        .orElseThrow(() ->
+                                new ResourceNotFoundException(
+                                        "Supplier not found with id "
+                                                + requestDto.getSupplierId()));
 
         Product product = new Product();
 
@@ -71,7 +78,10 @@ public class ProductServiceImpl implements ProductService {
 
         Product product =
                 productRepository.findById(productId)
-                        .orElseThrow();
+                        .orElseThrow(() ->
+                                new ResourceNotFoundException(
+                                        "Product not found with id "
+                                                + productId));
 
         return mapToResponse(product);
     }
@@ -92,17 +102,26 @@ public class ProductServiceImpl implements ProductService {
 
         Product product =
                 productRepository.findById(productId)
-                        .orElseThrow();
+                        .orElseThrow(() ->
+                                new ResourceNotFoundException(
+                                        "Product not found with id "
+                                                + productId));
 
         Category category =
                 categoryRepository.findById(
                                 requestDto.getCategoryId())
-                        .orElseThrow();
+                        .orElseThrow(() ->
+                                new ResourceNotFoundException(
+                                        "Category not found with id "
+                                                + requestDto.getCategoryId()));
 
         Supplier supplier =
                 supplierRepository.findById(
                                 requestDto.getSupplierId())
-                        .orElseThrow();
+                        .orElseThrow(() ->
+                                new ResourceNotFoundException(
+                                        "Supplier not found with id "
+                                                + requestDto.getSupplierId()));
 
         product.setName(requestDto.getName());
         product.setDescription(requestDto.getDescription());

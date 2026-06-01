@@ -3,6 +3,7 @@ package com.project.inventory_management_system.service.impl;
 import com.project.inventory_management_system.dto.request.CategoryRequestDto;
 import com.project.inventory_management_system.dto.response.CategoryResponseDto;
 import com.project.inventory_management_system.entity.Category;
+import com.project.inventory_management_system.exception.ResourceNotFoundException;
 import com.project.inventory_management_system.repository.CategoryRepository;
 import com.project.inventory_management_system.service.CategoryService;
 import org.springframework.stereotype.Service;
@@ -56,7 +57,10 @@ public class CategoryServiceImpl implements CategoryService {
 
         Category category =
                 categoryRepository.findById(categoryId)
-                        .orElseThrow();
+                        .orElseThrow(() ->
+                                new ResourceNotFoundException(
+                                        "Category not found with id "
+                                                + categoryId));
 
         return new CategoryResponseDto(
                 category.getId(),
@@ -71,7 +75,10 @@ public class CategoryServiceImpl implements CategoryService {
 
         Category category =
                 categoryRepository.findById(categoryId)
-                        .orElseThrow();
+                        .orElseThrow(() ->
+                                new ResourceNotFoundException(
+                                        "Category not found with id "
+                                                + categoryId));
 
         category.setName(requestDto.getName());
 

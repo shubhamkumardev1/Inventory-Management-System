@@ -3,6 +3,7 @@ package com.project.inventory_management_system.service.impl;
 import com.project.inventory_management_system.dto.request.EmployeeRequestDto;
 import com.project.inventory_management_system.dto.response.EmployeeResponseDto;
 import com.project.inventory_management_system.entity.Employee;
+import com.project.inventory_management_system.exception.ResourceNotFoundException;
 import com.project.inventory_management_system.repository.EmployeeRepository;
 import com.project.inventory_management_system.service.EmployeeService;
 import org.springframework.stereotype.Service;
@@ -47,7 +48,10 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         Employee employee =
                 employeeRepository.findById(employeeId)
-                        .orElseThrow();
+                        .orElseThrow(() ->
+                                new ResourceNotFoundException(
+                                        "Employee not found with id "
+                                                + employeeId));
 
         return new EmployeeResponseDto(
                 employee.getId(),
@@ -79,7 +83,10 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         Employee employee =
                 employeeRepository.findById(employeeId)
-                        .orElseThrow();
+                        .orElseThrow(() ->
+                                new ResourceNotFoundException(
+                                        "Employee not found with id "
+                                                + employeeId));
 
         employee.setName(requestDto.getName());
         employee.setEmail(requestDto.getEmail());

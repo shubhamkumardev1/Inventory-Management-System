@@ -3,6 +3,7 @@ package com.project.inventory_management_system.service.impl;
 import com.project.inventory_management_system.dto.request.SupplierRequestDto;
 import com.project.inventory_management_system.dto.response.SupplierResponseDto;
 import com.project.inventory_management_system.entity.Supplier;
+import com.project.inventory_management_system.exception.ResourceNotFoundException;
 import com.project.inventory_management_system.repository.SupplierRepository;
 import com.project.inventory_management_system.service.SupplierService;
 import org.springframework.stereotype.Service;
@@ -49,7 +50,10 @@ public class SupplierServiceImpl implements SupplierService {
 
         Supplier supplier =
                 supplierRepository.findById(supplierId)
-                        .orElseThrow();
+                        .orElseThrow(() ->
+                                new ResourceNotFoundException(
+                                        "Supplier not found with id "
+                                                + supplierId));
 
         return new SupplierResponseDto(
                 supplier.getId(),
@@ -83,7 +87,10 @@ public class SupplierServiceImpl implements SupplierService {
 
         Supplier supplier =
                 supplierRepository.findById(supplierId)
-                        .orElseThrow();
+                        .orElseThrow(() ->
+                                new ResourceNotFoundException(
+                                        "Supplier not found with id "
+                                                + supplierId));
 
         supplier.setName(requestDto.getName());
         supplier.setContactPerson(requestDto.getContactPerson());
